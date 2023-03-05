@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
 
-function App() {
+function App(props) {
+  const [cartItems, setCartItems] = useState([]);
+  const setItemsCtr = props.setItems;
+
+  let items = [
+    { name: "Red" },
+    { name: "Orange" },
+    { name: "Yellow" },
+    { name: "Green" },
+    { name: "Blue" },
+    { name: "Purple" },
+  ];
+
+  const onAddBtnClick = () => {
+    setItemsCtr((itemsCtr) => itemsCtr + 1);
+  };
+
+  let listItems = items.map((item) => (
+    <li key={item.id}>
+      {item.name} <button onClick={onAddBtnClick}>Add</button>
+    </li>
+  ));
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Home</h1>
+      <ul>{listItems}</ul>
     </div>
   );
 }
